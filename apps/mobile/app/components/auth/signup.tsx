@@ -96,13 +96,6 @@ export const Signup = ({
       setLastSynced(await db.lastSynced());
       clearMessage();
       setEmailVerifyMessage();
-      if (!SettingsService.getProperty("serverUrls")) {
-        Navigation.navigate("PayWall", {
-          canGoBack: false,
-          state: route.params.state,
-          context: "signup"
-        });
-      }
       return true;
     } catch (e) {
       setCurrentStep(SignupSteps.signup);

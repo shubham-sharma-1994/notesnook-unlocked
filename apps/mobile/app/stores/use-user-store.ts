@@ -74,14 +74,9 @@ export const useUserStore = create<UserStore>((set) => ({
             presentDialog({
               title: "App Lock Disabled",
               paragraph: feature?.error,
-              positiveText: strings.upgrade(),
-              negativeText: strings.cancel(),
+              positiveText: strings.gotIt(),
               positivePress: async () => {
                 eSendEvent(eCloseSimpleDialog);
-                if (SettingsService.getProperty("serverUrls")) return;
-                Navigation.navigate("PayWall", {
-                  context: "logged-in"
-                });
               }
             });
           }, 1000);

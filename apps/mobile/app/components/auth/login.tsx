@@ -81,15 +81,7 @@ export const Login = ({
       }
     }, 5000);
 
-    if (!PremiumService.get() && !SettingsService.getProperty("serverUrls")) {
-      Navigation.navigate("PayWall", {
-        context: "signup",
-        state: route.params?.state,
-        canGoBack: false
-      });
-    } else {
-      Progress.present();
-    }
+    Progress.present();
   });
   const { width, height } = useWindowDimensions();
   const isTablet = width > 600;

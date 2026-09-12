@@ -301,7 +301,6 @@ let Settings: any = null;
 let ManageTags: any = null;
 let AddReminder: any = null;
 let RelationsList: any = null;
-let PayWall: any = null;
 let Wrapped: any = null;
 export const RootNavigation = () => {
   const introCompleted = useSettingStore(
@@ -482,14 +481,6 @@ export const RootNavigation = () => {
             return RelationsList;
           }}
         />
-        <RootStack.Screen
-          name="PayWall"
-          getComponent={() => {
-            PayWall = PayWall || require("../components/paywall").default;
-            return PayWall;
-          }}
-        />
-
         <RootStack.Screen
           name="Wrapped"
           getComponent={() => {

@@ -195,83 +195,18 @@ export default function PaywallSheet<Tid extends FeatureId>(props: {
             paddingHorizontal: DefaultAppStyles.GAP
           }}
         >
-          <Paragraph
-            style={{
-              marginVertical: 10
-            }}
-            size={AppFontSize.xs}
-          >
-            <Heading size={AppFontSize.xs}>{strings.cancelAnytime()}</Heading>{" "}
-            {strings.googleReminderTrial()}
-          </Paragraph>
-
           <Button
-            type="accent"
-            title={strings.upgrade()}
+            type="secondary"
+            title={strings.gotIt()}
             style={{
               marginVertical: DefaultAppStyles.GAP_VERTICAL,
               width: "100%"
             }}
             onPress={() => {
-              if (PremiumService.get()) {
-                if (
-                  pricingPlans.user?.subscription.plan ===
-                    SubscriptionPlan.LEGACY_PRO ||
-                  !isCurrentPlatform
-                ) {
-                  ToastManager.show({
-                    message: strings.cannotChangePlan(),
-                    context: "local"
-                  });
-                  return;
-                }
-
-                if (isSubscribedOnWeb) {
-                  ToastManager.show({
-                    message: strings.changePlanOnWeb(),
-                    context: "local"
-                  });
-                  return;
-                }
-              }
-
               eSendEvent(eCloseSheet);
-              if (!useUserStore.getState().user) {
-                Navigation.navigate("Auth", {
-                  mode: AuthMode.login
-                });
-                return;
-              }
-              Navigation.navigate("PayWall", {
-                context: "logged-in",
-                state: {
-                  planId: pricingPlans.currentPlan?.id,
-                  productId: isGithubRelease
-                    ? "yearly"
-                    : (pricingPlans.selectProduct as any).productId,
-                  billingType: "annual"
-                }
-              });
             }}
           />
         </View>
-
-        {isSubscribedOnWeb ? null : (
-          <Button
-            type="plain"
-            title={strings.exploreAllPlans()}
-            icon="arrow-right"
-            iconPosition="right"
-            onPress={() => {
-              eSendEvent(eCloseSheet);
-              Navigation.navigate("PayWall", {
-                context: useUserStore.getState().user
-                  ? "logged-in"
-                  : "logged-out"
-              });
-            }}
-          />
-        )}
       </>
     </View>
   );
