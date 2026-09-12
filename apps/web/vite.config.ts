@@ -44,6 +44,7 @@ const isTesting =
 const isDesktop = process.env.PLATFORM === "desktop";
 const isThemeBuilder = process.env.THEME_BUILDER === "true";
 const isAnalyzing = process.env.ANALYZING === "true";
+const isCommunityBuild = process.env.NN_COMMUNITY_BUILD !== "false";
 
 export default defineConfig({
   envPrefix: "NN_",
@@ -83,7 +84,8 @@ export default defineConfig({
     PLATFORM: `"${process.env.PLATFORM}"`,
     IS_TESTING: process.env.TEST === "true",
     IS_BETA: isBeta,
-    IS_THEME_BUILDER: isThemeBuilder
+    IS_THEME_BUILDER: isThemeBuilder,
+    IS_COMMUNITY_BUILD: isCommunityBuild
   },
   logLevel: process.env.NODE_ENV === "production" ? "warn" : "info",
   resolve: {

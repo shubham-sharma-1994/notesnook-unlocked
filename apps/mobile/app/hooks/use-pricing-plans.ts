@@ -16,6 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+import { isCommunityBuild } from "@notesnook/common";
 import { Plan, SubscriptionPlan } from "@notesnook/core";
 import React, { useEffect, useRef, useState } from "react";
 import { useAsync } from "react-async-hook";
@@ -750,7 +751,8 @@ const usePricingPlans = (options?: PricingPlansOptions) => {
     },
     regionalDiscount: regionalDiscount.result,
     isGithubRelease: isGithubRelease,
-    isSubscribed: () => user?.subscription?.plan !== SubscriptionPlan.FREE,
+    isSubscribed: () =>
+      isCommunityBuild() || user?.subscription?.plan !== SubscriptionPlan.FREE,
     finish: () => options?.onBuy?.()
   };
 };
