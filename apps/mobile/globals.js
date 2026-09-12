@@ -11,6 +11,8 @@ import { i18n } from "@lingui/core";
 import Config from "react-native-config";
 import OpenPGP from "react-native-fast-openpgp";
 
+globalThis.IS_COMMUNITY_BUILD = Config.COMMUNITY_BUILD === "true";
+
 OpenPGP.useJSI = false;
 
 let domParser;

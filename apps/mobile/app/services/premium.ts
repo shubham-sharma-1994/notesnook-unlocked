@@ -17,6 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import { isCommunityBuild } from "@notesnook/common";
 import { SubscriptionPlan } from "@notesnook/core";
 import { strings } from "@notesnook/intl";
 import { Platform } from "react-native";
@@ -86,7 +87,8 @@ async function loadProductsAndSubs() {
 }
 
 function get() {
-  // if (__DEV__ || Config.isTesting === "true") return true;
+  if (isCommunityBuild()) return true;
+
   return (
     useUserStore.getState().user?.subscription?.plan !== undefined &&
     useUserStore.getState().user?.subscription?.plan !== SubscriptionPlan.FREE

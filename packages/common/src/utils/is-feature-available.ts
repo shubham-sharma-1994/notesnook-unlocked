@@ -20,6 +20,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import { SubscriptionPlan } from "@notesnook/core";
 import { database as db } from "../database.js";
 
+declare global {
+  // Set by each client before the application starts. Community builds unlock
+  // client-side feature gates without changing the user's server entitlement.
+  var IS_COMMUNITY_BUILD: boolean | undefined;
+}
+
+export function isCommunityBuild() {
+  return globalThis.IS_COMMUNITY_BUILD === true;
+}
+
 type CaptionValue = ("infinity" | (string & {})) | boolean | number;
 type Limit<TCaption extends CaptionValue = CaptionValue> = {
   caption: TCaption;
@@ -571,6 +581,8 @@ export async function areFeaturesAvailable<TIds extends FeatureId[]>(
 }
 
 async function getUserPlan() {
+  if (isCommunityBuild()) return SubscriptionPlan.BELIEVER;
+
   const user = await db.user.getUser();
   const plan = user?.subscription?.plan || SubscriptionPlan.FREE;
   return plan;

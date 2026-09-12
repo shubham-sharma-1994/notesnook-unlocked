@@ -28,6 +28,8 @@ import Config from "./utils/config";
 import { setI18nGlobal, Messages } from "@notesnook/intl";
 import { i18n } from "@lingui/core";
 
+globalThis.IS_COMMUNITY_BUILD = IS_COMMUNITY_BUILD;
+
 const colorScheme = JSON.parse(
   window.localStorage.getItem("colorScheme") || '"light"'
 );

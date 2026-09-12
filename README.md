@@ -16,6 +16,18 @@ Notesnook is our **proof** that privacy does _not_ (always) have to come at the 
 
 This repository contains all the code required to build & use the Notesnook web, desktop & mobile clients. If you are looking for a full feature list or screenshots, please check the [website](https://notesnook.com/).
 
+### Community builds
+
+This fork enables the optional community build policy by default. Community
+builds make the client-side feature matrix available without requiring a
+subscription record. They do not forge subscription data, bypass
+authentication, or remove server-side limits enforced by a Notesnook
+deployment.
+
+To restore the upstream client-side plan gates for a web or desktop build, set
+`NN_COMMUNITY_BUILD=false` before building. Mobile builds use `.env` for normal
+development and `.env.public` for the community release configuration.
+
 ## Developer guide
 
 ### Technologies & languages
