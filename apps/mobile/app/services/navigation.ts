@@ -72,7 +72,6 @@ const routeNames = {
   ManageTags: "ManageTags",
   AddReminder: "AddReminder",
   RelationsList: "RelationsList",
-  PayWall: "PayWall",
   Wrapped: "Wrapped"
 };
 

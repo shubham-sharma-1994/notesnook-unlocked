@@ -68,24 +68,6 @@ export const NotesnookCircle = () => {
               ? strings.freeUserCircleNotice()
               : strings.trialUserCircleNotice()}
           </Paragraph>
-
-          {!isOnTrial ? null : (
-            <Button
-              title={strings.upgradePlan()}
-              onPress={() => {
-                Navigation.navigate("PayWall", {
-                  canGoBack: true,
-                  context: useUserStore.getState().user
-                    ? "logged-in"
-                    : "logged-out"
-                });
-              }}
-              style={{
-                alignSelf: "flex-start",
-                paddingHorizontal: 0
-              }}
-            />
-          )}
         </View>
       )}
 
@@ -160,16 +142,6 @@ const Partner = ({
               title={strings.redeemCode()}
               width="100%"
               onPress={() => {
-                if (!PremiumService.get()) {
-                  Navigation.navigate("PayWall", {
-                    canGoBack: true,
-                    context: useUserStore.getState().user
-                      ? "logged-in"
-                      : "logged-out"
-                  });
-                  return;
-                }
-
                 db.circle
                   .redeem(item.id)
                   .then((result) => setCode(result?.code))

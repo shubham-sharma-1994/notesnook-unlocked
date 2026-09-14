@@ -353,23 +353,6 @@ export default function LinkNote(props: {
                 <Paragraph color={colors.secondary.paragraph}>
                   {blockLinking?.error}
                 </Paragraph>
-                <Button
-                  title={strings.upgradePlan()}
-                  style={{
-                    width: "100%"
-                  }}
-                  type="accent"
-                  onPress={() => {
-                    Navigation.navigate("PayWall", {
-                      context: useUserStore.getState().user
-                        ? "logged-in"
-                        : "logged-out",
-                      canGoBack: true
-                    });
-
-                    props.close?.();
-                  }}
-                />
               </View>
             ) : null
           }

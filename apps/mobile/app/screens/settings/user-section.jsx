@@ -359,57 +359,6 @@ const SettingsUserSection = ({ item }) => {
                   </Paragraph>
                 </TouchableOpacity>
 
-                {((user.subscription?.provider ===
-                  SubscriptionProvider.PADDLE ||
-                  user.subscription?.provider ===
-                    SubscriptionProvider.STREETWRITERS ||
-                  !isCurrentPlatform) &&
-                  PremiumService.get()) ||
-                SettingsService.getProperty("serverUrls") ? null : (
-                  <Button
-                    title={
-                      user.subscription?.plan !== SubscriptionPlan.FREE
-                        ? strings.changePlan()
-                        : strings.upgradePlan()
-                    }
-                    onPress={() => {
-                      if (
-                        user?.subscription?.plan === SubscriptionPlan.LEGACY_PRO
-                      ) {
-                        ToastManager.show({
-                          message: strings.cannotChangePlan(),
-                          context: "local"
-                        });
-                        return;
-                      }
-
-                      if (
-                        user.subscription?.plan !== SubscriptionPlan.FREE &&
-                        user.subscription?.productId &&
-                        user.subscription?.productId.includes("5year")
-                      ) {
-                        ToastManager.show({
-                          message:
-                            "You have made a one time purchase. To change your plan please contact support.",
-                          type: "info"
-                        });
-                        return;
-                      }
-
-                      Navigation.navigate("PayWall", {
-                        context: "logged-in",
-                        canGoBack: true
-                      });
-                    }}
-                    type="accent"
-                    fontSize={AppFontSize.xs}
-                    style={{
-                      paddingHorizontal: DefaultAppStyles.GAP_SMALL,
-                      height: "auto",
-                      paddingVertical: DefaultAppStyles.GAP_SMALL
-                    }}
-                  />
-                )}
               </View>
             </View>
           </View>

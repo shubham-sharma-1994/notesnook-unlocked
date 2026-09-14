@@ -104,48 +104,6 @@ export function PlanLimits() {
         </View>
       ))}
 
-      {((user?.subscription?.provider === SubscriptionProvider.PADDLE ||
-        user?.subscription?.provider === SubscriptionProvider.STREETWRITERS ||
-        !isCurrentPlatform) &&
-        PremiumService.get()) ||
-      SettingsService.getProperty("serverUrls") ? null : (
-        <Button
-          title={strings.changePlan()}
-          onPress={() => {
-            if (user?.subscription?.plan === SubscriptionPlan.LEGACY_PRO) {
-              ToastManager.show({
-                message: strings.cannotChangePlan(),
-                context: "local"
-              });
-              return;
-            }
-
-            if (
-              user?.subscription.plan !== SubscriptionPlan.FREE &&
-              user?.subscription.productId?.includes("5year")
-            ) {
-              ToastManager.show({
-                message:
-                  "You have made a one time purchase. To change your plan please contact support.",
-                type: "info",
-                context: "local"
-              });
-              return;
-            }
-            Navigation.navigate("PayWall", {
-              context: "logged-in",
-              canGoBack: true
-            });
-            eSendEvent(eCloseSheet);
-          }}
-          type="accent"
-          fontSize={AppFontSize.xs}
-          style={{
-            width: "100%",
-            marginTop: DefaultAppStyles.GAP_VERTICAL
-          }}
-        />
-      )}
     </ScrollView>
   );
 }
